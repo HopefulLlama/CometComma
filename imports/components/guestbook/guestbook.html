@@ -1,0 +1,19 @@
+<div class="container pad-top">
+	<h1>Guest Book</h1>
+	<p>Use the form below to leave a comment.</p>
+
+	<input type="text" ng-model="$ctrl.newComment" ng-keyup="$event.keyCode == 13 ? $ctrl.addComment($ctrl.newComment) : null"/>
+	<button class="button" ng-click="$ctrl.addComment($ctrl.newComment)">Add Comment</button>
+
+	<hr />
+
+	<div class="panel panel-default" ng-repeat="comment in $ctrl.comments">
+		<div class="panel-heading">
+			<span class="panel-title">{{comment.username}} - {{comment.createdAt}}</span>
+			<button class="btn btn-danger btn-sm pull-right" ng-if="$ctrl.currentUser._id === comment.owner" ng-click="$ctrl.removeComment(comment)">Delete</button>
+		</div>
+		<div class="panel-body">
+			{{comment.text}}
+		</div>
+	</div>
+</div>
