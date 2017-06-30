@@ -1,13 +1,19 @@
 <div class="container pad-top">
-	<div>
+	<div class="bla-height">
 		<img src="/assets/sun-comma.square.jpg" class="img-thumbnail guestbook pull-left hidden-xs"/>
 		<h1>Guest Book</h1>
-		<p>Use the form below to leave a comment.</p>
+		
+		<div ng-if="!$ctrl.currentUser">
+			<p>Sign in to leave a comment in the guest book.</p>
+		</div>
 
-		<form class="form-inline">
+		<div ng-if="$ctrl.currentUser">
+			<p>Use the form below to leave a comment.</p>
+
 			<input class="form-control" type="text" ng-model="$ctrl.newComment" ng-keyup="$event.keyCode == 13 ? $ctrl.addComment($ctrl.newComment) : null"/>
 			<button class="btn btn-default" ng-click="$ctrl.addComment($ctrl.newComment)">Add Comment</button>
-		</form>
+		</div>
+
 	</div>
 	<hr />
 

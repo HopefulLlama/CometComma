@@ -43,4 +43,4 @@ export default angular.module('guestbook', [
 .component('guestbook', {
 	templateUrl: template,
 	controller: ['$scope', GuestbookCtrl]
-})
+});

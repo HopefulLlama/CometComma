@@ -42,7 +42,7 @@ nav {
 	color: #ffffff;
 }
 
-.section p {
+p {
 	font-family: serif;
 	line-height: 1.5;
 	font-size: 18px;
@@ -60,3 +60,7 @@ img.guestbook {
 	margin-right: 15px;
 	max-height: 113px;
 }
+
+.bla-height {
+	min-height: 113px;
+} 
