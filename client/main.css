@@ -55,3 +55,8 @@ nav {
 hr.small {
 	max-width: 50px;
 }
+
+img.guestbook {
+	margin-right: 15px;
+	max-height: 113px;
+}
