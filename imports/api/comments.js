@@ -33,7 +33,7 @@ Meteor.methods({
     check(commentId, String);
 
     const comment = Comments.findOne(commentId);
-    if(comment.private && comment.owner !== Meteor.userId()) {
+    if(comment.owner !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
     

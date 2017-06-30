@@ -1,0 +1,53 @@
+<div>
+  <div class="container pad-top">
+    <h1>Gallery</h1>
+    <p>View Comma Bean in her glory.</p>
+    <button class="btn btn-success" ng-if="$ctrl.currentUser.username === 'hopefulllama'" data-toggle="modal" data-target="#new-image-modal">+ New Image</button>
+  </div>
+
+  <div class="container pad-top">
+    <img ng-repeat="image in $ctrl.images" ng-src="{{image.filePath}}" ng-attr-alt="{{image.caption}}" class="img-thumbnail gallery-thumbnail" ng-click="$ctrl.focusImage(image)" data-toggle="modal" data-target="#focus-image-modal" />
+  </div>
+
+  <div class="modal fade" id="focus-image-modal" tabindex="-1" role="dialog" aria-labelledby="new-image-modal" ng-if="$ctrl.focussedImage !== null">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <img ng-attr-src="{{$ctrl.focussedImage.filePath}}" ng-attr-alt="{{$ctrl.focussedImage.caption}}" class="img-responsive center-block gallery-focus-image" />
+          <p>{{$ctrl.focussedImage.caption}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div ng-if="$ctrl.currentUser.username === 'hopefulllama'" class="modal fade" id="new-image-modal" tabindex="-1" role="dialog" aria-labelledby="new-image-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">New Image</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label>Image</label>
+              <input id="file-upload" type="file" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>Caption</label>
+              <input type="text" class="form-control" ng-model="$ctrl.caption" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" ng-click="$ctrl.uploadImage()">Upload Image</button>
+          <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

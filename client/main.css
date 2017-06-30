@@ -64,3 +64,13 @@ img.guestbook {
 .bla-height {
 	min-height: 113px;
 } 
+
+img.gallery-thumbnail {
+	max-height: 140px;
+	cursor: hand;
+	cursor: pointer;
+}
+
+img.gallery-focus-image {
+	max-height: 500px;
+}
