@@ -6,14 +6,14 @@
   </div>
 
   <div class="container pad-top">
-    <img ng-repeat="image in $ctrl.images" ng-src="{{image.filePath}}" ng-attr-alt="{{image.caption}}" class="img-thumbnail gallery-thumbnail" ng-click="$ctrl.focusImage(image)" data-toggle="modal" data-target="#focus-image-modal" />
+    <img ng-repeat="image in $ctrl.images" ng-src="/uploads/{{image.filePath}}" ng-attr-alt="{{image.caption}}" class="img-thumbnail gallery-thumbnail" ng-click="$ctrl.focusImage(image)" data-toggle="modal" data-target="#focus-image-modal" />
   </div>
 
   <div class="modal fade" id="focus-image-modal" tabindex="-1" role="dialog" aria-labelledby="new-image-modal" ng-if="$ctrl.focussedImage !== null">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body text-center">
-          <img ng-attr-src="{{$ctrl.focussedImage.filePath}}" ng-attr-alt="{{$ctrl.focussedImage.caption}}" class="img-responsive center-block gallery-focus-image" />
+          <img ng-attr-src="/uploads/{{$ctrl.focussedImage.filePath}}" ng-attr-alt="{{$ctrl.focussedImage.caption}}" class="img-responsive center-block gallery-focus-image" />
           <p>{{$ctrl.focussedImage.caption}}</p>
         </div>
         <div class="modal-footer">
@@ -45,7 +45,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" ng-click="$ctrl.uploadImage()">Upload Image</button>
+          <button type="button" class="btn btn-success" ng-click="$ctrl.uploadImage()" data-dismiss="modal">Upload Image</button>
           <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
         </div>
       </div>

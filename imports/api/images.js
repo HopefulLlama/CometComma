@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 const fs = require('fs');
-const publicDirectory = process.env['METEOR_SHELL_DIR'] + '/../../../public';
+const uploadsDirectory = process.env['METEOR_SHELL_DIR'] + '/../../../.uploads/';
 
 export const Images = new Mongo.Collection('images');
 
@@ -27,9 +27,9 @@ Meteor.methods({
     }
 
 		var timestamp = new Date();
-		var name = '/assets/uploads/' + (timestamp.getTime().toString()) + '-' + fileName;
+		var name = (timestamp.getTime().toString()) + '-' + fileName;
 		if(Meteor.isServer) {
-  		fs.writeFileSync(publicDirectory + name, file, 'binary');
+  		fs.writeFileSync(uploadsDirectory + name, file, 'binary');
 		}
 		Images.insert({
 			filePath: name,
@@ -41,7 +41,7 @@ Meteor.methods({
   },
   'images.remove': function(image) {
 		if(Meteor.isServer) {
-  		fs.unlinkSync(publicDirectory + image.filePath);
+  		fs.unlinkSync(uploadsDirectory + image.filePath);
     }
     const imageRecord = Images.findOne(image._id);
     if(Meteor.user().username !== 'hopefulllama') {
