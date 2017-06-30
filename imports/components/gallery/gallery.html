@@ -17,6 +17,7 @@
           <p>{{$ctrl.focussedImage.caption}}</p>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-danger" ng-if="$ctrl.currentUser.username === 'hopefulllama'" ng-click="$ctrl.deleteImage($ctrl.focussedImage)" data-dismiss="modal">Delete</button>
           <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
         </div>
       </div>

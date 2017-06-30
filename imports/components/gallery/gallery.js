@@ -41,6 +41,10 @@ class GalleryCtrl {
 
 		fileReader.readAsBinaryString(file);
 	}
+
+	deleteImage(image) {
+		Meteor.call('images.remove', image);
+	}
 }
 
 export default angular.module('gallery', [

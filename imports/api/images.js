@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 const fs = require('fs');
+const publicDirectory = process.env['METEOR_SHELL_DIR'] + '/../../../public';
 
 export const Images = new Mongo.Collection('images');
 
@@ -25,11 +26,10 @@ Meteor.methods({
     	throw new Meteor.Error('caption-too-long');
     }
 
-		var path = process.env['METEOR_SHELL_DIR'] + '/../../../public';
 		var timestamp = new Date();
 		var name = '/assets/uploads/' + (timestamp.getTime().toString()) + '-' + fileName;
 		if(Meteor.isServer) {
-  		fs.writeFileSync(path+name, file, 'binary');
+  		fs.writeFileSync(publicDirectory + name, file, 'binary');
 		}
 		Images.insert({
 			filePath: name,
@@ -39,14 +39,15 @@ Meteor.methods({
       username: Meteor.user().username
     });
   },
-  'images.remove': function(imageId) {
-    check(imageId, String);
-
-    const image = Images.findOne(imageId);
-    if(!Meteor.user().admin) {
+  'images.remove': function(image) {
+		if(Meteor.isServer) {
+  		fs.unlinkSync(publicDirectory + image.filePath);
+    }
+    const imageRecord = Images.findOne(image._id);
+    if(Meteor.user().username !== 'hopefulllama') {
       throw new Meteor.Error('not-authorized');
     }
     
-    Images.remove(imageId);
+    Images.remove(imageRecord._id);
   }
 });
